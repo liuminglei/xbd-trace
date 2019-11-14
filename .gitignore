@@ -35,5 +35,3 @@ mvnw.cmd
 # CMake
 cmake-build-debug/
 
-### 转换以后的pom ###
-.flattened-pom.xml

@@ -1,0 +1,16 @@
+<configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p] - %c - %m%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.springframework" level="INFO"></Logger>
+
+        <Root level="INFO" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+
+</configuration>

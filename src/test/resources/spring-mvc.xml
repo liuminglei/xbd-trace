@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd" -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+
+
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <bean id="byteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
+    </bean>
+
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <!--配置编码方式 -->
+        <property name="supportedMediaTypes" value="text/plain; charset=UTF-8" />
+    </bean>
+
+    <!-- 阿里巴巴FastJsonHttpMessageConverter -->
+    <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+                <value>application/xml;charset=UTF-8</value>
+            </list>
+        </property>
+        <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"></property>
+        <property name="features">
+            <array>
+                <value>PrettyFormat</value>
+                <value>WriteMapNullValue</value>
+                <value>WriteNullStringAsEmpty</value>
+                <value>WriteNullListAsEmpty</value>
+                <value>WriteNullNumberAsZero</value>
+                <value>WriteNullBooleanAsFalse</value>
+                <value>WriteDateUseDateFormat</value>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 启动注解驱动的Spring MVC功能 注册请求url和pojo类方法的映射 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="false">
+            <ref bean="fastJsonHttpMessageConverter" />
+            <ref bean="byteArrayHttpMessageConverter" />
+            <ref bean="stringHttpMessageConverter" />
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <context:annotation-config />
+
+    <!-- 扫描controller包 -->
+    <context:component-scan base-package="org.xbdframework.context.trace" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <!-- 针对freemarker的视图配置 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="false" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".html" />
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <property name="requestContextAttribute" value="request" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+    </bean>
+
+    <!-- 阿里巴巴FastJsonView -->
+    <bean id="fastJsonJsonView" class="com.alibaba.fastjson.support.spring.FastJsonJsonView">
+        <property name="charset" value="UTF-8"></property>
+        <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"></property>
+        <property name="features">
+            <array>
+                <value>PrettyFormat</value>
+                <value>WriteMapNullValue</value>
+                <value>WriteNullStringAsEmpty</value>
+                <value>WriteNullListAsEmpty</value>
+                <value>WriteNullNumberAsZero</value>
+                <value>WriteNullBooleanAsFalse</value>
+                <value>WriteDateUseDateFormat</value>
+            </array>
+        </property>
+    </bean>
+</beans>
