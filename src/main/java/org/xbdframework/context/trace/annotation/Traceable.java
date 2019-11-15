@@ -11,9 +11,7 @@ import org.xbdframework.context.trace.TraceHandler;
  * {@link org.xbdframework.context.trace.interceptor.DefaultTraceAttribute}
  * class, and in fact {@link AnnotationTraceAttributeSource} will directly
  * convert the data to the latter class, so that xbd's trace support code
- * does not have to know about annotations. If no rules are relevant to the exception,
- * it will be treated like
- * {@link org.xbdframework.context.trace.interceptor.DefaultTraceAttribute}.
+ * does not have to know about annotations.
  *
  * <p>For specific information about the semantics of this annotation's attributes,
  * consult the {@link org.xbdframework.context.trace.TraceDefinition} and
