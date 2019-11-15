@@ -23,10 +23,8 @@ public class DefaultTraceAnnotationParser implements TraceAnnotationParser, Seri
 
     @Override
     public TraceAttribute parseTraceAnnotation(AnnotatedElement ae) {
-        System.out.println("***************" + ae.toString());
         AnnotationAttributes attributes = AnnotatedElementUtils.getMergedAnnotationAttributes(ae, Traceable.class);
         if (attributes != null) {
-            System.out.println("----------------------");
             return parseTraceAnnotation(attributes);
         }
         else {
