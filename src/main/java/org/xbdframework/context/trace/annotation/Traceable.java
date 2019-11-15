@@ -13,9 +13,7 @@ import org.xbdframework.context.trace.TraceHandler;
  * convert the data to the latter class, so that xbd's trace support code
  * does not have to know about annotations. If no rules are relevant to the exception,
  * it will be treated like
- * {@link org.xbdframework.context.trace.interceptor.DefaultTraceAttribute}
- * (rolling back on {@link RuntimeException} and {@link Error} but not on checked
- * exceptions).
+ * {@link org.xbdframework.context.trace.interceptor.DefaultTraceAttribute}.
  *
  * <p>For specific information about the semantics of this annotation's attributes,
  * consult the {@link org.xbdframework.context.trace.TraceDefinition} and
